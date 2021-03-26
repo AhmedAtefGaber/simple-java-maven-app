@@ -36,7 +36,7 @@ pipeline {
                 sh 'docker build -t ahmedatefosman/simple-app:${BUILD_ID}  -f jenkins/scripts/Dockerfile .'
             }
         }
-        stage('Docker Build') {
+        stage('Docker push') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'atef-dockerhub-passwd',
                             	 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
