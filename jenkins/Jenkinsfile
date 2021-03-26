@@ -31,12 +31,12 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Build') {
+        stage('Docker Build') {
             steps {
                 sh 'docker build -t ahmedatefosman/simple-app:${BUILD_ID}  -f jenkins/scripts/Dockerfile .'
             }
         }
-        stage('Build') {
+        stage('Docker Build') {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'atef-dockerhub-passwd',
                             	 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
