@@ -21,9 +21,33 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+        /*stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
+            }
+        }*/
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'docker build -t ahmedatefosman/simple-app:${BUILD_ID}  -f jenkins/scripts/Dockerfile .'
+            }
+        }
+        stage('Build') {
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'atef-dockerhub-passwd',
+                            	 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+				    sh 'docker login -u ${env.USERNAME}  -p ${env.PASSWORD} '
+				}
+                sh 'docker push ahmedatefosman/simple-app:${BUILD_ID}'
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh 'docker run ahmedatefosman/simple-app:${BUILD_ID}'
             }
         }
     }
