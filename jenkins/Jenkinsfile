@@ -42,7 +42,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'atef-dockerhub-passwd',
                             	 usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-				    sh 'docker login -u ${env.USERNAME}  -p ${env.PASSWORD} '
+				    sh 'docker login -u ${USERNAME}  -p ${PASSWORD} '
 				}
                 sh 'docker push ahmedatefosman/simple-app:${BUILD_ID}'
             }
