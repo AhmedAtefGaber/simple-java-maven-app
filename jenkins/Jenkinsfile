@@ -40,7 +40,7 @@ pipeline {
         }*/
         stage('Docker Build') {
             steps {
-                sh 'docker build -t ahmedatefosman/simple-app:${BUILD_ID}  -f jenkins/scripts/Dockerfile .'
+                sh 'docker build -t ahmedatefosman/simple-app:${BUILD_ID} .'
             }
         }
         stage('Docker push') {
