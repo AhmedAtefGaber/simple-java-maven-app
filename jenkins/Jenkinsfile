@@ -26,11 +26,6 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }*/
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
         stage('Docker Build') {
             steps {
                 sh 'docker build -t ahmedatefosman/simple-app:${BUILD_ID}  -f jenkins/scripts/Dockerfile .'
