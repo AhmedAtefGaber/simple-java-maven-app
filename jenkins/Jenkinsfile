@@ -10,11 +10,11 @@ pipeline {
             }
             post {
 				success {
-					archiveArtifacts 'target/*.jar'
+					archiveArtifacts 'target/my-app-1.0-SNAPSHOT.jar'
                     nexusArtifactUploader artifacts: [
 						[
 							artifactId: 'my-app', 
-							file: 'target/*.jar', 
+							file: 'target/my-app-1.0-SNAPSHOT.jar', 
 							type: 'jar'
 						]
 					], 
