@@ -2,14 +2,16 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            agent {
+            /*agent {
                 docker {
                     image 'maven:3-alpine'
                     args '-v cashe-m2:/root/.m2'
                 }
-            }
+            }*/
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                withMaven(mavenLocalRepo: ' ~/.m2/repository ') {
+                    sh 'mvn -B -DskipTests clean package'
+                }
             }
             post {
 				success {
@@ -18,14 +20,16 @@ pipeline {
 			}
         }
         stage('Test') {
-            agent {
+            /*agent {
                 docker {
                     image 'maven:3-alpine'
                     args '-v cashe-m2:/root/.m2'
                 }
-            }
+            }*/
             steps {
-                sh 'mvn test'
+                withMaven(mavenLocalRepo: ' ~/.m2/repository ') {
+                    sh 'mvn test'
+                }
             }
             post {
                 always {
