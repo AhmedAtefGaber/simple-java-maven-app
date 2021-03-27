@@ -7,7 +7,6 @@ public class App
 {
 
     private final String message = "Hello World!";
-    private final String message-1 = "Hello atef";
 
     public App() {}
 
@@ -16,7 +15,7 @@ public class App
     }
 
     private final String getMessage() {
-        return message,message-1;
+        return message;
     }
 
 }
