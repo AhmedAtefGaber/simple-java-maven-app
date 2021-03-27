@@ -1,3 +1,4 @@
-FROM ubuntu:18.04
-COPY target/my-app-1.0-SNAPSHOT.jar /root/target/my-app-1.0-SNAPSHOT.jar
-CMD ["java", "-jar", "/root/target/my-app-1.0-SNAPSHOT.jar"]
+FROM openjdk:8-jre-slim
+
+COPY target/my-app-1.0-SNAPSHOT.jar /app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
