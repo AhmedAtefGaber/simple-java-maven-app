@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'mvn'
+    }
     stages {
         stage('Build') {
             /*agent {
@@ -9,9 +12,9 @@ pipeline {
                 }
             }*/
             steps {
-                withMaven(mavenLocalRepo: ' ~/.m2/repository ') {
+                //withMaven(mavenLocalRepo: ' ~/.m2/repository ') {
                     sh 'mvn -B -DskipTests clean package'
-                }
+                //}
             }
             post {
 				success {
@@ -27,9 +30,9 @@ pipeline {
                 }
             }*/
             steps {
-                withMaven(mavenLocalRepo: ' ~/.m2/repository ') {
+                //withMaven(mavenLocalRepo: ' ~/.m2/repository ') {
                     sh 'mvn test'
-                }
+                //}
             }
             post {
                 always {
