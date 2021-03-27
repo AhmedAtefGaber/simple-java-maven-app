@@ -11,6 +11,20 @@ pipeline {
             post {
 				success {
 					archiveArtifacts 'target/*.jar'
+                    nexusArtifactUploader artifacts: [
+						[
+							artifactId: 'my-app', 
+							file: 'target/*.jar', 
+							type: 'jar'
+						]
+					], 
+					credentialsId: 'nexus-password', 
+					groupId: 'com.mycompany.app', 
+					nexusUrl: '10.95.0.2:8081', 
+					nexusVersion: 'nexus3', 
+					protocol: 'http', 
+					repository: 'maven-snapshots', 
+					version: '1.0-SNAPSHOT'
 				}
 			}
         }
